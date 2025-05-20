@@ -1,3 +1,4 @@
 [submodule "api-cypress-test"]
 	path = api-cypress-test
-	url = https://github.com/khodyachiy/api-cypress-test.git
+	url = https://github.com/Khodyachiy/apiTestCy.git
+	branch = main
