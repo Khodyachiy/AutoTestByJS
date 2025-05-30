@@ -31,12 +31,24 @@ describe('Test with backend', () => {
 
   })
 
-  it.only('verify popular tags are displayed', () => {
+  it('verify popular tags are displayed', () => {
     cy.get('.tag-list')
     .should('contain', 'cypress')
     .and('contain', 'automation')
     .and('contain', 'testing')
 
+  })
+
+  it.only('verify global feed likes count', () => {
+    cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/articles/feed*', { "articles":[],"articlesCount":0 })
+    cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/articles*', { fixture: 'articles.json' })
+
+    cy.contains('Global Feed').click()
+    cy.get('app-article-list button').then(heartList => {
+      expect(heartList[0]).to.contain('660')
+      expect(heartList[1]).to.contain('235')
+    })
+    
   })
 
 })
